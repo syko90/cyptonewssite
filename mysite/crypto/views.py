@@ -24,7 +24,8 @@ def prices(request):
         crypto = json.loads(crypto_request.content)
         return render(request, 'prices.html', {'quote':quote, 'crypto': crypto})
     else:
-        return render(request, 'prices.html', {})
+        notfound = ' Enter a proper crypto symbol that mathes real cryptocurrency'
+        return render(request, 'prices.html', {'notfound': notfound })
 
 
  
