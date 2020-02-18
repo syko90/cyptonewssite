@@ -1,21 +1,29 @@
 {% extends 'base.html'  %}
 
 {% block content %}
-{% for key,value in crypto.DISPLAY.items %}
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-            <h1 class="display-4">{{ key }}</h1>
-            <strong>Name:</strong>{{ key }} <br/>
-            <strong>Price:</strong>{{value.USD.PRICE }}<br/>
-            <strong>Day High:</strong>{{value.USD.HIGHDAY}}<br/>
-            <strong>Day Low:</strong>{{value.USD.LOWDAY}}<br/>
-            <strong>Marketcap:</strong>{{value.USD.MKTCAP}}<br/>
-     
-        </div>
-        <br/><br/>
-    
-      
-      
-{% endfor %}
 
+{% if notfound %}
+    <h3> {{ notfound }}</h3>
+{% else %}
+    {% if crypto.Response %}
+        Sorry, {{ quote }} this symbol deosen't exist
+    {% endif %}
+
+    {% for key,value in crypto.DISPLAY.items %}
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                <h1 class="display-4">{{ key }}</h1>
+                <strong>Name:</strong>{{ key }} <br/>
+                <strong>Price:</strong>{{value.USD.PRICE }}<br/>
+                <strong>Day High:</strong>{{value.USD.HIGHDAY}}<br/>
+                <strong>Day Low:</strong>{{value.USD.LOWDAY}}<br/>
+                <strong>Marketcap:</strong>{{value.USD.MKTCAP}}<br/>
+        
+            </div>
+            <br/><br/>
+        
+        
+        
+    {% endfor %}
+{% endif %}
 {% endblock %}
