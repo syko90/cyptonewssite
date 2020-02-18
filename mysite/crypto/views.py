@@ -1,12 +1,10 @@
 from django.shortcuts import render
-
+import json
+import requests
 
 
 
 def home(request):
-    import json
-    import requests
-
     # Grab some Price Data
     price_request =  requests.get('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC,USDT,EOS,BNB,HMR,TRX,ETC,NEO,MIOTA&tsyms=USD')
     price = json.loads(price_request.content)
@@ -18,4 +16,15 @@ def home(request):
     return render(request, 'home.html', {'api':api, 'price': price })
 
 def prices(request):
-    return render(request, 'prices.html', {})
+    if request.method == 'POST':
+        #quote = request.POST.get('quote', 'none')
+        quote = request.POST['quote']
+        quote = quote.upper()
+        crypto_request =  requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + quote + "&tsyms=USD")
+        crypto = json.loads(crypto_request.content)
+        return render(request, 'prices.html', {'quote':quote, 'crypto': crypto})
+    else:
+        return render(request, 'prices.html', {})
+
+
+ 
