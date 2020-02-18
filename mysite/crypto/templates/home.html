@@ -3,7 +3,13 @@
 {% block content %}
 
 {% for key,value in price.DISPLAY.items %}
-    {{ key }} - {{ value.USD.PRICE }} <br/>
+    <strong>Name: </strong>{{ key }} <br/> 
+    <strong>Price:</strong> {{ value.USD.PRICE }} <br/>
+    <strong>Daily HIGH:</strong>{{value.USD.HIGHDAY}}<br/>
+    <strong>Daily LOW:</strong>{{value.USD.LOWDAY}}<br/>
+    <strong>Marketcap:</strong>{{value.USD.MKTCAP}}<br/>
+
+    <hr> <br/>
 {% endfor %}
 
 <br/> <br/>
